@@ -1,0 +1,37 @@
+spring:
+  # 数据库
+  datasource:
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/music_space?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+  redis:
+    database: 1
+    host: 127.0.0.1
+    port: 6379
+    timeout: 3000
+    # redis线程池
+    lettuce:
+      pool:
+        # 连接池最大连接数（使用负值表示没有限制） 默认 8
+        max-active: 8
+        # 最大阻塞等待时间（使用负值表示没有限制） 默认 -1
+        max-wait: -1
+        # 最大空闲连接数
+        max-idle: 8
+        # 最小空闲连接数
+        min-idle: 0
+  profiles:
+    active: dev
+
+wechat:
+  appId: wx69bb0bc0e70cee1d
+  appSecret: 04aada3e865d92ed544950857b58f374
+
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*Mapper.xml
+  type-aliases-package: com.neil.musicspace.mybatis.entity.*
+  config-location: classpath:mybatis/mybatis-config.xml
+
+server:
+  port: 8080
