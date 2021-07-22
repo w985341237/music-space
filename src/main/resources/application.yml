@@ -1,5 +1,5 @@
 spring:
-  # Êı¾İ¿â
+  # æ•°æ®åº“
   datasource:
     username: root
     password: 123456
@@ -10,19 +10,23 @@ spring:
     host: 127.0.0.1
     port: 6379
     timeout: 3000
-    # redisÏß³Ì³Ø
+    # redisçº¿ç¨‹æ± 
     lettuce:
       pool:
-        # Á¬½Ó³Ø×î´óÁ¬½ÓÊı£¨Ê¹ÓÃ¸ºÖµ±íÊ¾Ã»ÓĞÏŞÖÆ£© Ä¬ÈÏ 8
+        # è¿æ¥æ± æœ€å¤§è¿æ¥æ•°ï¼ˆä½¿ç”¨è´Ÿå€¼è¡¨ç¤ºæ²¡æœ‰é™åˆ¶ï¼‰ é»˜è®¤ 8
         max-active: 8
-        # ×î´ó×èÈûµÈ´ıÊ±¼ä£¨Ê¹ÓÃ¸ºÖµ±íÊ¾Ã»ÓĞÏŞÖÆ£© Ä¬ÈÏ -1
+        # æœ€å¤§é˜»å¡ç­‰å¾…æ—¶é—´ï¼ˆä½¿ç”¨è´Ÿå€¼è¡¨ç¤ºæ²¡æœ‰é™åˆ¶ï¼‰ é»˜è®¤ -1
         max-wait: -1
-        # ×î´ó¿ÕÏĞÁ¬½ÓÊı
+        # æœ€å¤§ç©ºé—²è¿æ¥æ•°
         max-idle: 8
-        # ×îĞ¡¿ÕÏĞÁ¬½ÓÊı
+        # æœ€å°ç©ºé—²è¿æ¥æ•°
         min-idle: 0
   profiles:
     active: dev
+  mvc:
+    view:
+      prefix: classpath:/templates/
+      suffix: .html
 
 wechat:
   appId: wx69bb0bc0e70cee1d
@@ -30,8 +34,12 @@ wechat:
 
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*Mapper.xml
-  type-aliases-package: com.neil.musicspace.mybatis.entity.*
+  type-aliases-package: com.neil.musicspace.models.entity.*
   config-location: classpath:mybatis/mybatis-config.xml
 
 server:
   port: 8080
+
+jwt:
+  secret: mamba4life
+  expire: 600

@@ -1,12 +1,11 @@
-package com.neil.musicspace.mybatis.dao;
+package com.neil.musicspace.models.dao;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.neil.musicspace.mybatis.entity.User;
-import com.neil.musicspace.mybatis.entity.UserExample;
+import com.neil.musicspace.models.entity.User;
+import com.neil.musicspace.models.entity.UserExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface UserMapper extends BaseMapper<User> {
+public interface UserMapper {
     long countByExample(UserExample example);
 
     int deleteByExample(UserExample example);

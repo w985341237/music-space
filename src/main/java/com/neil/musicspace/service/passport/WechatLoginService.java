@@ -6,6 +6,6 @@ package com.neil.musicspace.service.passport;
  * @Date 2021/6/29 10:36
  * @Version 1.0
  **/
-public interface WechatLoginManager {
-    String code2Session(String code);
+public interface WechatLoginService {
+
 }

@@ -1,17 +1,14 @@
-package com.neil.musicspace.mybatis.entity;
-
-import io.swagger.annotations.ApiModel;
+package com.neil.musicspace.models.entity;
 
 import java.io.Serializable;
 import java.util.Date;
 
-@ApiModel("用户实体")
 public class User implements Serializable {
     private Integer id;
 
-    private String openId;
+    private String openid;
 
-    private String unionId;
+    private String unionid;
 
     private String nickName;
 
@@ -21,22 +18,28 @@ public class User implements Serializable {
 
     private String phoneNumber;
 
-    private Date addTime;
+    private Integer roleId;
+
+    private Integer status;
 
     private Byte isDelete;
 
+    private Date addTime;
+
     private static final long serialVersionUID = 1L;
 
-    public User(Integer id, String openId, String unionId, String nickName, Byte gender, String avatarUrl, String phoneNumber, Date addTime, Byte isDelete) {
+    public User(Integer id, String openid, String unionid, String nickName, Byte gender, String avatarUrl, String phoneNumber, Integer roleId, Integer status, Byte isDelete, Date addTime) {
         this.id = id;
-        this.openId = openId;
-        this.unionId = unionId;
+        this.openid = openid;
+        this.unionid = unionid;
         this.nickName = nickName;
         this.gender = gender;
         this.avatarUrl = avatarUrl;
         this.phoneNumber = phoneNumber;
-        this.addTime = addTime;
+        this.roleId = roleId;
+        this.status = status;
         this.isDelete = isDelete;
+        this.addTime = addTime;
     }
 
     public User() {
@@ -51,20 +54,20 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getOpenId() {
-        return openId;
+    public String getOpenid() {
+        return openid;
     }
 
-    public void setOpenId(String openId) {
-        this.openId = openId == null ? null : openId.trim();
+    public void setOpenid(String openid) {
+        this.openid = openid == null ? null : openid.trim();
     }
 
-    public String getUnionId() {
-        return unionId;
+    public String getUnionid() {
+        return unionid;
     }
 
-    public void setUnionId(String unionId) {
-        this.unionId = unionId == null ? null : unionId.trim();
+    public void setUnionid(String unionid) {
+        this.unionid = unionid == null ? null : unionid.trim();
     }
 
     public String getNickName() {
@@ -99,12 +102,20 @@ public class User implements Serializable {
         this.phoneNumber = phoneNumber == null ? null : phoneNumber.trim();
     }
 
-    public Date getAddTime() {
-        return addTime;
+    public Integer getRoleId() {
+        return roleId;
     }
 
-    public void setAddTime(Date addTime) {
-        this.addTime = addTime;
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public Byte getIsDelete() {
@@ -115,6 +126,14 @@ public class User implements Serializable {
         this.isDelete = isDelete;
     }
 
+    public Date getAddTime() {
+        return addTime;
+    }
+
+    public void setAddTime(Date addTime) {
+        this.addTime = addTime;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -122,14 +141,16 @@ public class User implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", openId=").append(openId);
-        sb.append(", unionId=").append(unionId);
+        sb.append(", openid=").append(openid);
+        sb.append(", unionid=").append(unionid);
         sb.append(", nickName=").append(nickName);
         sb.append(", gender=").append(gender);
         sb.append(", avatarUrl=").append(avatarUrl);
         sb.append(", phoneNumber=").append(phoneNumber);
-        sb.append(", addTime=").append(addTime);
+        sb.append(", roleId=").append(roleId);
+        sb.append(", status=").append(status);
         sb.append(", isDelete=").append(isDelete);
+        sb.append(", addTime=").append(addTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
