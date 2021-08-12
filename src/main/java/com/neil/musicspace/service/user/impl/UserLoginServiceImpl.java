@@ -18,6 +18,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
@@ -30,7 +31,7 @@ import java.util.Date;
 @Slf4j
 @Service
 public class UserLoginServiceImpl implements UserLoginService {
-    @Autowired(required = false)
+    @Resource
     private UserMapperEx userMapperEx;
 
     @Autowired

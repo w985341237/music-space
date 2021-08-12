@@ -7,7 +7,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@MapperScan(basePackages = {"com.neil.musicspace.mybatis.dao"})
+@MapperScan(basePackages = {"com.neil.musicspace.models.dao"})
 @ServletComponentScan
 public class MusicSpaceApplication {
 

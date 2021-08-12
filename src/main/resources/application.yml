@@ -33,7 +33,7 @@ wechat:
   appSecret: 04aada3e865d92ed544950857b58f374
 
 mybatis:
-  mapper-locations: classpath:mybatis/mapper/*Mapper.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
   type-aliases-package: com.neil.musicspace.models.entity.*
   config-location: classpath:mybatis/mybatis-config.xml
 
