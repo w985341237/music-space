@@ -45,10 +45,9 @@ public class WeixinServiceImpl implements WeixinService {
             Response response = OkHttpUtil.getInstance().getData(url);
             JSONObject jsonObject = JSON.parseObject(response.body().string());
 
-            WxCode2SessionDTO wxDTO = new WxCode2SessionDTO();
-            BeanUtils.copyProperties(jsonObject, wxDTO);
+            WxCode2SessionDTO wxDTO = JSON.toJavaObject(jsonObject, WxCode2SessionDTO.class);
 
-            if (wxDTO.getErrcode() != 0) {
+            if (wxDTO.getErrcode() != null) {
                 log.error("code2Session fail, errcode:" + wxDTO.getErrcode() + " errmsg:" + wxDTO.getErrmsg());
                 throw new BasicException(Result.UN_KNOW_ERROR);
             }

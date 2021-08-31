@@ -1,6 +1,7 @@
 package com.neil.musicspace.models.dto;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 /**
  * @Description UserDTO
@@ -8,6 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @Date 2021/7/9 13:45
  * @Version 1.0
  **/
+@Data
 public class WxUserInfoDTO {
     @ApiModelProperty("用户昵称")
     public String nickName;
