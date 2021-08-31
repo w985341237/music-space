@@ -5,7 +5,9 @@ import cn.hutool.crypto.digest.Digester;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
@@ -21,15 +23,16 @@ import java.util.*;
  * @Version 1.0
  **/
 @Slf4j
+@Configuration
 public class WeixinUtil {
 
-    @Value("wechat-appId")
-    private static String appId;
+    @Value("${wechat.appId}")
+    private String appId;
 
-    @Value("wechat-appSecret")
-    private static String appSecret;
+    @Value("${wechat.appSecret}")
+    private String appSecret;
 
-    public static Map<String, String> getWechatConfig() {
+    public Map<String, String> getWechatConfig() {
         Map<String, String> map = new HashMap<>();
         map.put("appId", appId);
         map.put("appSecret", appSecret);
@@ -44,7 +47,7 @@ public class WeixinUtil {
      * @param signature
      * @return
      */
-    public static boolean checkSignature(String rawData, String sessionKey, String signature) {
+    public boolean checkSignature(String rawData, String sessionKey, String signature) {
         Digester digester = new Digester(DigestAlgorithm.SHA1);
         String data = rawData + sessionKey;
         String genSignature = digester.digestHex(data);
@@ -59,7 +62,7 @@ public class WeixinUtil {
      * @param iv
      * @return
      */
-    public static JSONObject wxDecrypt(String encryptedData, String sessionKey, String iv) {
+    public JSONObject wxDecrypt(String encryptedData, String sessionKey, String iv) {
         // 被加密的数据
         byte[] dataBytes = Base64.getDecoder().decode(encryptedData);
         // 加密秘钥

@@ -1,29 +1,29 @@
 
 <!DOCTYPE html>
 <html>
-<!--<head>-->
-<!--    <title>QQ音乐H5音频播放器Demo</title>-->
-<!--    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">-->
-<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
-<!--    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />-->
-<!--    <style>-->
-<!--        html{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}-->
-<!--        body{padding:1em;line-height:1.6;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:16px;background:#eee}-->
-<!--        body,h1,h2,h3,h4,h5,p,ul,ol,dl,dd,fieldset,textarea{margin:0}-->
-<!--        fieldset,legend,textarea,input,button{padding:0}-->
-<!--        button,input,select,textarea{font-family:inherit;font-size:100%;margin:0;*font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}-->
-<!--        ul,ol{padding-left:0;list-style-type:none}-->
-<!--        a img,fieldset{border:0}-->
-<!--        a{text-decoration:none}-->
-<!--        html{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;line-height:1.6}-->
-<!--        a{color:#607fa6;text-decoration:none}-->
-<!--        body,html{padding:0;height:100%;width:100%;-webkit-appearance:none;-webkit-tap-highlight-color:rgba(0,0,0,0)}-->
-<!--        h2{padding:1em}-->
-<!--        .action-list{overflow-x: scroll}-->
-<!--        .btn{display:inline-block;margin:.3em;border:1px solid #10c7d3;background:#00b7c3;padding:.5em 1em;color:#fff;text-decoration:none;line-height: 1em;}-->
-<!--        .js_tips{height: 2em;text-indent: .5em;margin:.5em;border-left: 5px solid #aaa;background: #ddd;line-height: 2em;}-->
-<!--    </style>-->
-<!--</head>-->
+<head>
+    <title>QQ音乐H5音频播放器Demo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <style>
+        html{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
+        body{padding:1em;line-height:1.6;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:16px;background:#eee}
+        body,h1,h2,h3,h4,h5,p,ul,ol,dl,dd,fieldset,textarea{margin:0}
+        fieldset,legend,textarea,input,button{padding:0}
+        button,input,select,textarea{font-family:inherit;font-size:100%;margin:0;*font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
+        ul,ol{padding-left:0;list-style-type:none}
+        a img,fieldset{border:0}
+        a{text-decoration:none}
+        html{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;line-height:1.6}
+        a{color:#607fa6;text-decoration:none}
+        body,html{padding:0;height:100%;width:100%;-webkit-appearance:none;-webkit-tap-highlight-color:rgba(0,0,0,0)}
+        h2{padding:1em}
+        .action-list{overflow-x: scroll}
+        .btn{display:inline-block;margin:.3em;border:1px solid #10c7d3;background:#00b7c3;padding:.5em 1em;color:#fff;text-decoration:none;line-height: 1em;}
+        .js_tips{height: 2em;text-indent: .5em;margin:.5em;border-left: 5px solid #aaa;background: #ddd;line-height: 2em;}
+    </style>
+</head>
 <body>
 <h2>QQ音乐H5音频播放器Demo</h2>
 <div>
@@ -142,6 +142,7 @@
             player.play("002R32LQ2u9c4z", {target: target});
         })
         .ontap(".js_demo3", function (e) {
+            console.log("hahaha111");
             player.loop = false;
             player.play([
                 106350845, // 免费歌曲

@@ -40,17 +40,20 @@ public class UserLoginServiceImpl implements UserLoginService {
     @Autowired
     private RedisUtil redisUtil;
 
+    @Autowired
+    private WeixinUtil weixinUtil;
+
     @Override
     public UserVO miniProgramLogin(HttpServletResponse response, LoginDTO loginDTO, WxCode2SessionDTO content) {
         String openId = content.getOpenid();
 
-        if (!WeixinUtil.checkSignature(loginDTO.rawData, content.getSessionKey(), loginDTO.getSignature())) {
+        if (!weixinUtil.checkSignature(loginDTO.rawData, content.getSessionKey(), loginDTO.getSignature())) {
             log.error("signature is invalid, signature: [{}]", loginDTO.getSignature());
             throw new BasicException(Result.WEIXIN_LOGIN_ERROR);
         }
 
         // 解密数据
-        JSONObject userInfo = WeixinUtil.wxDecrypt(loginDTO.getEncryptedData(), content.getSessionKey(), loginDTO.getIv());
+        JSONObject userInfo = weixinUtil.wxDecrypt(loginDTO.getEncryptedData(), content.getSessionKey(), loginDTO.getIv());
 
         User user = new User();
         BeanUtils.copyProperties(userInfo, user);

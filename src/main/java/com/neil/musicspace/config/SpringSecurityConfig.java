@@ -31,8 +31,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
             "/configuration/security",
             "/swagger-ui.html",
             "/webjars/**",
-            "/index/*",
-            "/passport/*"
+            "/index/**",
+            "/passport/**"
     };
 
     @Override
@@ -40,7 +40,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 //禁用session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-
                 //定义验权失败返回格式
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler).authenticationEntryPoint(authenticationEntryPoint).and()
                 .authorizeRequests();
@@ -48,6 +47,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers(AUTH_LIST)
+                .permitAll()
+                .anyRequest()
                 .authenticated()
                 .and()
                 .httpBasic();

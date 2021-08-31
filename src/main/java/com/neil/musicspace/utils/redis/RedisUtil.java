@@ -1,6 +1,7 @@
 package com.neil.musicspace.utils.redis;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  * @Date 2021/6/30 15:05
  * @Version 1.0
  **/
-@Service
+@Configuration
 public class RedisUtil {
 
     @Autowired

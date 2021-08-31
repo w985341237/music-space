@@ -27,6 +27,8 @@ spring:
     view:
       prefix: classpath:/templates/
       suffix: .html
+  thymeleaf:
+    cache: false
 
 wechat:
   appId: wx69bb0bc0e70cee1d
