@@ -1,9 +1,12 @@
 package com.neil.musicspace.models.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.io.Serializable;
 
+@TableName("ms_room")
 public class Room implements Serializable {
-    private Integer id;
+    private Long id;
 
     private String roomName;
 
@@ -19,7 +22,7 @@ public class Room implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Room(Integer id, String roomName, String roomDesc, String roomNumber, String roomPassword, Integer managerId, Byte isDelete) {
+    public Room(Long id, String roomName, String roomDesc, String roomNumber, String roomPassword, Integer managerId, Byte isDelete) {
         this.id = id;
         this.roomName = roomName;
         this.roomDesc = roomDesc;
@@ -33,11 +36,11 @@ public class Room implements Serializable {
         super();
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

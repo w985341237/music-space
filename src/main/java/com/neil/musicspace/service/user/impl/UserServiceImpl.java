@@ -1,11 +1,9 @@
 package com.neil.musicspace.service.user.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.neil.musicspace.models.dao.UserMapper;
 import com.neil.musicspace.models.dao.UserMapperEx;
 import com.neil.musicspace.models.entity.User;
 import com.neil.musicspace.service.user.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

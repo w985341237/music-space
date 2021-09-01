@@ -6,7 +6,7 @@ import com.alibaba.fastjson.JSON;
 import com.neil.musicspace.exception.BasicException;
 import com.neil.musicspace.models.entity.Role;
 import com.neil.musicspace.models.entity.User;
-import com.neil.musicspace.models.enums.Result;
+import com.neil.musicspace.models.enums.ReturnCode;
 import com.neil.musicspace.service.role.RoleService;
 import com.neil.musicspace.service.user.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -50,7 +50,7 @@ public class WxAppletAuthenticationManager implements AuthenticationManager {
             String signature = digester.digestHex(data);
             if (!wxAppletAuthenticationToken.getSignature().equals(signature)) {
                 log.error("signature is invalid, received:[{}] generated:[{}]", wxAppletAuthenticationToken.getSignature(), signature);
-                throw new BasicException(Result.GLOBAL_ERROR_PARAM_ERROR);
+                throw new BasicException(ReturnCode.CLIENT_AUTHENTICATION_FAILED);
             }
 
             user = JSON.parseObject(wxAppletAuthenticationToken.getRawData(), User.class);

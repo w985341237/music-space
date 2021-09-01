@@ -1,9 +1,9 @@
 package com.neil.musicspace.security;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.neil.musicspace.exception.ParamException;
+import com.neil.musicspace.exception.BasicException;
 import com.neil.musicspace.models.dto.WxCode2SessionDTO;
-import com.neil.musicspace.models.enums.Result;
+import com.neil.musicspace.models.enums.ReturnCode;
 import com.neil.musicspace.service.weixin.WeixinService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,13 +36,13 @@ public class WxAppletAuthenticationFilter extends AbstractAuthenticationProcessi
         String code = request.getParameter("code");
         if (StringUtils.isBlank(code)) {
             log.error("code is null");
-            throw new ParamException(Result.GLOBAL_ERR_NO_CODE);
+            throw new BasicException(ReturnCode.RC400);
         }
         String rawData = request.getParameter("rawData");
         String signature = request.getParameter("signature");
         if (StringUtils.isBlank(rawData) || StringUtils.isBlank(signature)) {
             log.error("rawData or signature is null");
-            throw new ParamException(Result.GLOBAL_ERROR_PARAM_ERROR);
+            throw new BasicException(ReturnCode.RC400);
         }
 
         WxCode2SessionDTO content = weixinService.code2Session(code);

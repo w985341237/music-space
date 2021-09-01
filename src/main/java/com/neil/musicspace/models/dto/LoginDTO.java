@@ -19,7 +19,7 @@ public class LoginDTO {
     public String code;
 
     @ApiModelProperty("用户信息对象")
-    public WxUserInfoDTO userInfo;
+    public String userInfo;
 
     @ApiModelProperty("不包括敏感信息的原始数据字符串，用于计算签名")
     public String rawData;

@@ -3,7 +3,7 @@
 <mapper namespace="com.neil.musicspace.models.dao.RoomMapper">
   <resultMap id="BaseResultMap" type="com.neil.musicspace.models.entity.Room">
     <constructor>
-      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
       <arg column="room_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="room_desc" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="room_number" javaType="java.lang.String" jdbcType="VARCHAR" />

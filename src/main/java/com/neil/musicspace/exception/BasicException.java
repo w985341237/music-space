@@ -7,15 +7,15 @@ package com.neil.musicspace.exception;
  * @Version 1.0
  **/
 
-import com.neil.musicspace.models.enums.Result;
+import com.neil.musicspace.models.enums.ReturnCode;
 import lombok.Getter;
 
 @Getter
 public class BasicException extends RuntimeException {
     private Integer code;
 
-    public BasicException(Result result) {
-        super(result.getMsg());
+    public BasicException(ReturnCode result) {
+        super(result.getMessage());
         this.code = result.getCode();
     }
 }

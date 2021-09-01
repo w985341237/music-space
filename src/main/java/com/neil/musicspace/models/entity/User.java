@@ -1,10 +1,13 @@
 package com.neil.musicspace.models.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.io.Serializable;
 import java.util.Date;
 
+@TableName("ms_user")
 public class User implements Serializable {
-    private Integer id;
+    private Long id;
 
     private String openid;
 
@@ -28,7 +31,7 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public User(Integer id, String openid, String unionid, String nickName, Byte gender, String avatarUrl, String phoneNumber, Integer roleId, Integer status, Byte isDelete, Date addTime) {
+    public User(Long id, String openid, String unionid, String nickName, Byte gender, String avatarUrl, String phoneNumber, Integer roleId, Integer status, Byte isDelete, Date addTime) {
         this.id = id;
         this.openid = openid;
         this.unionid = unionid;
@@ -46,11 +49,11 @@ public class User implements Serializable {
         super();
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -24,4 +24,6 @@ public class UserVO {
     private String phoneNumber;
 
     private Date addTime;
+
+    private String sessionKey;
 }

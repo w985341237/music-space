@@ -1,12 +1,14 @@
 package com.neil.musicspace.service.user.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.neil.musicspace.exception.BasicException;
 import com.neil.musicspace.models.dao.UserMapperEx;
 import com.neil.musicspace.models.dto.LoginDTO;
 import com.neil.musicspace.models.dto.WxCode2SessionDTO;
+import com.neil.musicspace.models.dto.WxUserInfoDTO;
 import com.neil.musicspace.models.entity.User;
-import com.neil.musicspace.models.enums.Result;
+import com.neil.musicspace.models.enums.ReturnCode;
 import com.neil.musicspace.models.vo.UserVO;
 import com.neil.musicspace.service.user.UserLoginService;
 import com.neil.musicspace.service.user.UserService;
@@ -49,27 +51,29 @@ public class UserLoginServiceImpl implements UserLoginService {
 
         if (!weixinUtil.checkSignature(loginDTO.rawData, content.getSessionKey(), loginDTO.getSignature())) {
             log.error("signature is invalid, signature: [{}]", loginDTO.getSignature());
-            throw new BasicException(Result.WEIXIN_LOGIN_ERROR);
+            throw new BasicException(ReturnCode.CLIENT_AUTHENTICATION_FAILED);
         }
 
+        WxUserInfoDTO wxUserInfo = JSON.parseObject(loginDTO.getUserInfo(), WxUserInfoDTO.class);
+
         // 解密数据
-        JSONObject userInfo = weixinUtil.wxDecrypt(loginDTO.getEncryptedData(), content.getSessionKey(), loginDTO.getIv());
+        JSONObject data = weixinUtil.wxDecrypt(loginDTO.getEncryptedData(), content.getSessionKey(), loginDTO.getIv());
 
         User user = new User();
-        BeanUtils.copyProperties(userInfo, user);
-        user.setOpenid(openId);
-        user.setUnionid(content.unionid);
+        BeanUtils.copyProperties(wxUserInfo, user);
+        user.setOpenid(data.getString("openId"));
+        user.setUnionid(data.getString("unionId") == null ? "" : data.getString("unionId"));
         user.setAddTime(new Date());
 
         userService.insertOrUpdateByOpenId(openId, user);
 
         // 下发token
         String token = JwtUtil.createToken(user, content.getSessionKey());
-
         response.setHeader("authorization", token);
 
+        User model = userService.getUserByOpenid(openId);
         UserVO userVO = new UserVO();
-        BeanUtils.copyProperties(user, userVO);
+        BeanUtils.copyProperties(model, userVO);
 
         return userVO;
     }

@@ -3,7 +3,7 @@
 <mapper namespace="com.neil.musicspace.models.dao.UserMapper">
   <resultMap id="BaseResultMap" type="com.neil.musicspace.models.entity.User">
     <constructor>
-      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
       <arg column="openid" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="unionid" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="nick_name" javaType="java.lang.String" jdbcType="VARCHAR" />

@@ -6,8 +6,8 @@ import com.neil.musicspace.models.dao.RoleMapperEx;
 import com.neil.musicspace.models.dao.UserMapperEx;
 import com.neil.musicspace.models.entity.Role;
 import com.neil.musicspace.models.entity.User;
-import com.neil.musicspace.models.enums.Result;
-import com.neil.musicspace.models.vo.GenericResponse;
+import com.neil.musicspace.models.enums.ReturnCode;
+import com.neil.musicspace.models.vo.ResultData;
 import com.neil.musicspace.utils.jwt.JwtUtil;
 import com.neil.musicspace.utils.redis.RedisUtil;
 import io.jsonwebtoken.Claims;
@@ -54,7 +54,6 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         String openid = (String) claims.get("openid");
 
         if (redisUtil.exists(authToken)) {
-            response.getWriter().write(JSON.toJSONString(GenericResponse.response(Result.GLOBAL_ERR_NO_SIGN_IN)));
             return;
         }
 
