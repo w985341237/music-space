@@ -114,52 +114,52 @@ public class RoomExample {
             return (Criteria) this;
         }
 
-        public Criteria andIdEqualTo(Integer value) {
+        public Criteria andIdEqualTo(Long value) {
             addCriterion("id =", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotEqualTo(Integer value) {
+        public Criteria andIdNotEqualTo(Long value) {
             addCriterion("id <>", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdGreaterThan(Integer value) {
+        public Criteria andIdGreaterThan(Long value) {
             addCriterion("id >", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdGreaterThanOrEqualTo(Integer value) {
+        public Criteria andIdGreaterThanOrEqualTo(Long value) {
             addCriterion("id >=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdLessThan(Integer value) {
+        public Criteria andIdLessThan(Long value) {
             addCriterion("id <", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdLessThanOrEqualTo(Integer value) {
+        public Criteria andIdLessThanOrEqualTo(Long value) {
             addCriterion("id <=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdIn(List<Integer> values) {
+        public Criteria andIdIn(List<Long> values) {
             addCriterion("id in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotIn(List<Integer> values) {
+        public Criteria andIdNotIn(List<Long> values) {
             addCriterion("id not in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdBetween(Integer value1, Integer value2) {
+        public Criteria andIdBetween(Long value1, Long value2) {
             addCriterion("id between", value1, value2, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotBetween(Integer value1, Integer value2) {
+        public Criteria andIdNotBetween(Long value1, Long value2) {
             addCriterion("id not between", value1, value2, "id");
             return (Criteria) this;
         }
@@ -561,6 +561,66 @@ public class RoomExample {
 
         public Criteria andIsDeleteNotBetween(Byte value1, Byte value2) {
             addCriterion("is_delete not between", value1, value2, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddTimeIsNull() {
+            addCriterion("add_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddTimeIsNotNull() {
+            addCriterion("add_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddTimeEqualTo(Long value) {
+            addCriterion("add_time =", value, "addTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddTimeNotEqualTo(Long value) {
+            addCriterion("add_time <>", value, "addTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddTimeGreaterThan(Long value) {
+            addCriterion("add_time >", value, "addTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddTimeGreaterThanOrEqualTo(Long value) {
+            addCriterion("add_time >=", value, "addTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddTimeLessThan(Long value) {
+            addCriterion("add_time <", value, "addTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddTimeLessThanOrEqualTo(Long value) {
+            addCriterion("add_time <=", value, "addTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddTimeIn(List<Long> values) {
+            addCriterion("add_time in", values, "addTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddTimeNotIn(List<Long> values) {
+            addCriterion("add_time not in", values, "addTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddTimeBetween(Long value1, Long value2) {
+            addCriterion("add_time between", value1, value2, "addTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddTimeNotBetween(Long value1, Long value2) {
+            addCriterion("add_time not between", value1, value2, "addTime");
             return (Criteria) this;
         }
     }

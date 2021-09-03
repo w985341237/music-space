@@ -1,9 +1,10 @@
 package com.neil.musicspace.models.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
-import java.util.Date;
 
 @TableName("ms_user")
 public class User implements Serializable {
@@ -27,11 +28,15 @@ public class User implements Serializable {
 
     private Byte isDelete;
 
-    private Date addTime;
+    @TableField(fill = FieldFill.INSERT)
+    private Long addTime;
+
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Long lastLoginTime;
 
     private static final long serialVersionUID = 1L;
 
-    public User(Long id, String openid, String unionid, String nickName, Byte gender, String avatarUrl, String phoneNumber, Integer roleId, Integer status, Byte isDelete, Date addTime) {
+    public User(Long id, String openid, String unionid, String nickName, Byte gender, String avatarUrl, String phoneNumber, Integer roleId, Integer status, Byte isDelete, Long addTime, Long lastLoginTime) {
         this.id = id;
         this.openid = openid;
         this.unionid = unionid;
@@ -43,6 +48,7 @@ public class User implements Serializable {
         this.status = status;
         this.isDelete = isDelete;
         this.addTime = addTime;
+        this.lastLoginTime = lastLoginTime;
     }
 
     public User() {
@@ -129,12 +135,20 @@ public class User implements Serializable {
         this.isDelete = isDelete;
     }
 
-    public Date getAddTime() {
+    public Long getAddTime() {
         return addTime;
     }
 
-    public void setAddTime(Date addTime) {
+    public void setAddTime(Long addTime) {
         this.addTime = addTime;
+    }
+
+    public Long getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Long lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
     }
 
     @Override
@@ -154,6 +168,7 @@ public class User implements Serializable {
         sb.append(", status=").append(status);
         sb.append(", isDelete=").append(isDelete);
         sb.append(", addTime=").append(addTime);
+        sb.append(", lastLoginTime=").append(lastLoginTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

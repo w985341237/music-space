@@ -2,6 +2,7 @@ package com.neil.musicspace.service.user.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.neil.musicspace.exception.BasicException;
 import com.neil.musicspace.models.dao.UserMapperEx;
 import com.neil.musicspace.models.dto.LoginDTO;
@@ -9,9 +10,12 @@ import com.neil.musicspace.models.dto.WxCode2SessionDTO;
 import com.neil.musicspace.models.dto.WxUserInfoDTO;
 import com.neil.musicspace.models.entity.User;
 import com.neil.musicspace.models.enums.ReturnCode;
+import com.neil.musicspace.models.vo.LoginVO;
 import com.neil.musicspace.models.vo.UserVO;
 import com.neil.musicspace.service.user.UserLoginService;
 import com.neil.musicspace.service.user.UserService;
+import com.neil.musicspace.service.user.UserServiceEx;
+import com.neil.musicspace.utils.DateUtil;
 import com.neil.musicspace.utils.WeixinUtil;
 import com.neil.musicspace.utils.jwt.JwtUtil;
 import com.neil.musicspace.utils.redis.RedisUtil;
@@ -40,13 +44,16 @@ public class UserLoginServiceImpl implements UserLoginService {
     private UserService userService;
 
     @Autowired
+    private UserServiceEx userServiceEx;
+
+    @Autowired
     private RedisUtil redisUtil;
 
     @Autowired
     private WeixinUtil weixinUtil;
 
     @Override
-    public UserVO miniProgramLogin(HttpServletResponse response, LoginDTO loginDTO, WxCode2SessionDTO content) {
+    public LoginVO miniProgramLogin(HttpServletResponse response, LoginDTO loginDTO, WxCode2SessionDTO content) {
         String openId = content.getOpenid();
 
         if (!weixinUtil.checkSignature(loginDTO.rawData, content.getSessionKey(), loginDTO.getSignature())) {
@@ -59,22 +66,30 @@ public class UserLoginServiceImpl implements UserLoginService {
         // 解密数据
         JSONObject data = weixinUtil.wxDecrypt(loginDTO.getEncryptedData(), content.getSessionKey(), loginDTO.getIv());
 
-        User user = new User();
-        BeanUtils.copyProperties(wxUserInfo, user);
-        user.setOpenid(data.getString("openId"));
-        user.setUnionid(data.getString("unionId") == null ? "" : data.getString("unionId"));
-        user.setAddTime(new Date());
+        User user = userServiceEx.getOne(Wrappers.<User>query().lambda().eq(User::getOpenid, openId));
 
-        userService.insertOrUpdateByOpenId(openId, user);
+        if (user == null) {
+            user = new User();
+            BeanUtils.copyProperties(wxUserInfo, user);
+            user.setOpenid(data.getString("openId"));
+            user.setUnionid(data.getString("unionId") == null ? "" : data.getString("unionId"));
+
+            userServiceEx.save(user);
+        } else {
+            userServiceEx.update(user, Wrappers.<User>query().lambda().eq(User::getOpenid, openId));
+        }
+
+        LoginVO loginVO = new LoginVO();
 
         // 下发token
         String token = JwtUtil.createToken(user, content.getSessionKey());
-        response.setHeader("authorization", token);
+        loginVO.setAccessToken(token);
+        loginVO.setSessionKey(content.getSessionKey());
 
-        User model = userService.getUserByOpenid(openId);
         UserVO userVO = new UserVO();
-        BeanUtils.copyProperties(model, userVO);
+        BeanUtils.copyProperties(user, userVO);
+        loginVO.setUserInfo(userVO);
 
-        return userVO;
+        return loginVO;
     }
 }

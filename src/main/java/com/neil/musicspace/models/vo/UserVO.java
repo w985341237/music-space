@@ -13,7 +13,7 @@ import java.util.Date;
 @Data
 public class UserVO {
 
-    private Integer id;
+    private Long id;
 
     private String nickName;
 
@@ -23,7 +23,7 @@ public class UserVO {
 
     private String phoneNumber;
 
-    private Date addTime;
+    private Long addTime;
 
-    private String sessionKey;
+    private Long LastLoginTime;
 }

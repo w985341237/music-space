@@ -2,6 +2,7 @@ package com.neil.musicspace.controller.passport;
 
 import com.neil.musicspace.models.dto.LoginDTO;
 import com.neil.musicspace.models.dto.WxCode2SessionDTO;
+import com.neil.musicspace.models.vo.LoginVO;
 import com.neil.musicspace.models.vo.UserVO;
 import com.neil.musicspace.service.passport.WechatLoginService;
 import com.neil.musicspace.service.user.UserLoginService;
@@ -38,7 +39,7 @@ public class LoginController {
 
     @ApiOperation("小程序登录")
     @PostMapping("/login")
-    public UserVO login(HttpServletResponse response, LoginDTO loginDTO) {
+    public LoginVO login(HttpServletResponse response, LoginDTO loginDTO) {
         WxCode2SessionDTO content = weixinService.code2Session(loginDTO.getCode());
 
         return userLoginService.miniProgramLogin(response, loginDTO, content);

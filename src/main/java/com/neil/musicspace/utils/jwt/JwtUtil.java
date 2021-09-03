@@ -50,7 +50,7 @@ public class JwtUtil {
         Date now = new Date(nowMillis);
         Date expireDate = new Date(nowMillis + EXPIRE * 1000);
         Map<String, Object> claims = new HashMap<>();
-        claims.put("id", user.getId());
+        claims.put("user_id", user.getId());
         claims.put("session_key", session_key);
 
         JwtBuilder builder = Jwts.builder()
@@ -60,7 +60,7 @@ public class JwtUtil {
                 .setExpiration(expireDate)
                 .signWith(signatureAlgorithm, SECRET.getBytes());
 
-        return builder.compact();
+        return TOKEN_PREFIX + builder.compact();
     }
 
     /**

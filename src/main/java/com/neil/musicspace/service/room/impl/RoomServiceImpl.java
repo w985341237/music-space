@@ -47,7 +47,7 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public void delRoom(Integer roomId) {
+    public void delRoom(Long roomId) {
         roomMapper.deleteByPrimaryKey(roomId);
     }
 

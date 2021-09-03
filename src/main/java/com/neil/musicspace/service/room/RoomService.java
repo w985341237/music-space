@@ -37,7 +37,7 @@ public interface RoomService {
      *
      * @param roomId
      */
-    void delRoom(Integer roomId);
+    void delRoom(Long roomId);
 
     /**
      * 分页获取房间列表

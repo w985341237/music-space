@@ -2,6 +2,8 @@ package com.neil.musicspace.service.user;
 
 import com.neil.musicspace.models.entity.User;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @Description UserService
  * @Author neil
@@ -9,18 +11,13 @@ import com.neil.musicspace.models.entity.User;
  * @Version 1.0
  **/
 public interface UserService {
-    /**
-     * 插入或更新用户
-     *
-     * @param user
-     */
-    void insertOrUpdateByOpenId(String openId, User user);
 
     /**
-     * 根据openid获取用户
+     * 绑定用户手机号码
      *
-     * @param openid
-     * @return
+     * @param encryptedData
+     * @param iv
+     * @param sessionKey
      */
-    User getUserByOpenid(String openid);
+    String bindPhone(HttpServletRequest request, String encryptedData, String iv, String sessionKey);
 }

@@ -11,7 +11,7 @@ public interface RoomMapper extends BaseMapper<Room> {
 
     int deleteByExample(RoomExample example);
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(Room record);
 
@@ -19,7 +19,7 @@ public interface RoomMapper extends BaseMapper<Room> {
 
     List<Room> selectByExample(RoomExample example);
 
-    Room selectByPrimaryKey(Integer id);
+    Room selectByPrimaryKey(Long id);
 
     int updateByExampleSelective(@Param("record") Room record, @Param("example") RoomExample example);
 

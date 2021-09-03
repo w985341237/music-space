@@ -10,6 +10,7 @@
       <arg column="room_password" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="manager_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="is_delete" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="add_time" javaType="java.lang.Long" jdbcType="BIGINT" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -71,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, room_name, room_desc, room_number, room_password, manager_id, is_delete
+    id, room_name, room_desc, room_number, room_password, manager_id, is_delete, add_time
   </sql>
   <select id="selectByExample" parameterType="com.neil.musicspace.models.entity.RoomExample" resultMap="BaseResultMap">
     select
@@ -88,15 +89,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from ms_room
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from ms_room
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.neil.musicspace.models.entity.RoomExample">
     delete from ms_room
@@ -107,10 +108,10 @@
   <insert id="insert" parameterType="com.neil.musicspace.models.entity.Room">
     insert into ms_room (id, room_name, room_desc, 
       room_number, room_password, manager_id, 
-      is_delete)
-    values (#{id,jdbcType=INTEGER}, #{roomName,jdbcType=VARCHAR}, #{roomDesc,jdbcType=VARCHAR}, 
+      is_delete, add_time)
+    values (#{id,jdbcType=BIGINT}, #{roomName,jdbcType=VARCHAR}, #{roomDesc,jdbcType=VARCHAR}, 
       #{roomNumber,jdbcType=VARCHAR}, #{roomPassword,jdbcType=VARCHAR}, #{managerId,jdbcType=INTEGER}, 
-      #{isDelete,jdbcType=TINYINT})
+      #{isDelete,jdbcType=TINYINT}, #{addTime,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.neil.musicspace.models.entity.Room">
     insert into ms_room
@@ -136,10 +137,13 @@
       <if test="isDelete != null">
         is_delete,
       </if>
+      <if test="addTime != null">
+        add_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=BIGINT},
       </if>
       <if test="roomName != null">
         #{roomName,jdbcType=VARCHAR},
@@ -159,6 +163,9 @@
       <if test="isDelete != null">
         #{isDelete,jdbcType=TINYINT},
       </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=BIGINT},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.neil.musicspace.models.entity.RoomExample" resultType="java.lang.Long">
@@ -171,7 +178,7 @@
     update ms_room
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+        id = #{record.id,jdbcType=BIGINT},
       </if>
       <if test="record.roomName != null">
         room_name = #{record.roomName,jdbcType=VARCHAR},
@@ -191,6 +198,9 @@
       <if test="record.isDelete != null">
         is_delete = #{record.isDelete,jdbcType=TINYINT},
       </if>
+      <if test="record.addTime != null">
+        add_time = #{record.addTime,jdbcType=BIGINT},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -198,13 +208,14 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update ms_room
-    set id = #{record.id,jdbcType=INTEGER},
+    set id = #{record.id,jdbcType=BIGINT},
       room_name = #{record.roomName,jdbcType=VARCHAR},
       room_desc = #{record.roomDesc,jdbcType=VARCHAR},
       room_number = #{record.roomNumber,jdbcType=VARCHAR},
       room_password = #{record.roomPassword,jdbcType=VARCHAR},
       manager_id = #{record.managerId,jdbcType=INTEGER},
-      is_delete = #{record.isDelete,jdbcType=TINYINT}
+      is_delete = #{record.isDelete,jdbcType=TINYINT},
+      add_time = #{record.addTime,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -230,8 +241,11 @@
       <if test="isDelete != null">
         is_delete = #{isDelete,jdbcType=TINYINT},
       </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=BIGINT},
+      </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.neil.musicspace.models.entity.Room">
     update ms_room
@@ -240,7 +254,8 @@
       room_number = #{roomNumber,jdbcType=VARCHAR},
       room_password = #{roomPassword,jdbcType=VARCHAR},
       manager_id = #{managerId,jdbcType=INTEGER},
-      is_delete = #{isDelete,jdbcType=TINYINT}
-    where id = #{id,jdbcType=INTEGER}
+      is_delete = #{isDelete,jdbcType=TINYINT},
+      add_time = #{addTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

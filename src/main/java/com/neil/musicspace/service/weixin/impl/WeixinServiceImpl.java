@@ -48,7 +48,7 @@ public class WeixinServiceImpl implements WeixinService {
 
             if (wxDTO.getErrcode() != null) {
                 log.error("code2Session fail, errcode:" + wxDTO.getErrcode() + " errmsg:" + wxDTO.getErrmsg());
-                throw new BasicException(ReturnCode.RC999);
+                throw new BasicException(ReturnCode.CLIENT_AUTHENTICATION_FAILED);
             }
 
             log.debug("code2session result:" + wxDTO.toString());

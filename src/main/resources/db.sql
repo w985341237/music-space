@@ -17,6 +17,7 @@ create table ms_room
     room_number varchar(10) not null comment '房间号',
     room_password varchar(50) null comment '房间密码',
     manager_id int not null comment '房主用户id',
+    add_time bigint not null comment '创建时间',
     is_delete tinyint(2) default 0 not null comment '逻辑删除 0-否 1-是',
     constraint ms_room_room_number_uindex
         unique (room_number)
@@ -35,7 +36,8 @@ create table ms_user
     role_id int default 1 not null comment '角色id',
     status int default 0 not null comment '状态 0-正常 -1-禁用',
     is_delete tinyint(2) default 0 not null comment '逻辑删除 0-否 1-是',
-    add_time datetime not null comment '创建时间',
+    add_time bigint not null comment '创建时间',
+    last_login_time bigint not null comment '最后登录时间',
     constraint ms_user_id_uindex
         unique (id)
 )

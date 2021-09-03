@@ -20,9 +20,11 @@ public class Room implements Serializable {
 
     private Byte isDelete;
 
+    private Long addTime;
+
     private static final long serialVersionUID = 1L;
 
-    public Room(Long id, String roomName, String roomDesc, String roomNumber, String roomPassword, Integer managerId, Byte isDelete) {
+    public Room(Long id, String roomName, String roomDesc, String roomNumber, String roomPassword, Integer managerId, Byte isDelete, Long addTime) {
         this.id = id;
         this.roomName = roomName;
         this.roomDesc = roomDesc;
@@ -30,6 +32,7 @@ public class Room implements Serializable {
         this.roomPassword = roomPassword;
         this.managerId = managerId;
         this.isDelete = isDelete;
+        this.addTime = addTime;
     }
 
     public Room() {
@@ -92,6 +95,14 @@ public class Room implements Serializable {
         this.isDelete = isDelete;
     }
 
+    public Long getAddTime() {
+        return addTime;
+    }
+
+    public void setAddTime(Long addTime) {
+        this.addTime = addTime;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -105,6 +116,7 @@ public class Room implements Serializable {
         sb.append(", roomPassword=").append(roomPassword);
         sb.append(", managerId=").append(managerId);
         sb.append(", isDelete=").append(isDelete);
+        sb.append(", addTime=").append(addTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

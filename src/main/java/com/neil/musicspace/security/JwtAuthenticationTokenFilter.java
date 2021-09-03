@@ -12,10 +12,15 @@ import com.neil.musicspace.utils.jwt.JwtUtil;
 import com.neil.musicspace.utils.redis.RedisUtil;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import javax.annotation.Resource;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -31,12 +36,13 @@ import java.util.stream.Collectors;
  * @Date 2021/7/12 13:21
  * @Version 1.0
  **/
+@Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Autowired
     private RedisUtil redisUtil;
-    @Autowired
+    @Resource
     private RoleMapperEx roleMapperEx;
-    @Autowired
+    @Resource
     private UserMapperEx userMapperEx;
 
     @Override
@@ -51,7 +57,8 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         String authToken = authHeader.substring("Bearer ".length());
 
         Claims claims = JwtUtil.parseToekn(authToken);
-        String openid = (String) claims.get("openid");
+        // todo 这块要改
+        String openid = (String) claims.get("user_id");
 
         if (redisUtil.exists(authToken)) {
             return;
