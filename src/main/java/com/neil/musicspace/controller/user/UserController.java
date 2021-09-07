@@ -1,9 +1,9 @@
 package com.neil.musicspace.controller.user;
 
+import com.neil.musicspace.models.entity.User;
 import com.neil.musicspace.models.vo.UserIndexVO;
 import com.neil.musicspace.service.user.UserService;
-import com.neil.musicspace.service.user.impl.UserServiceExImpl;
-import com.neil.musicspace.utils.jwt.JwtUtil;
+import com.neil.musicspace.service.user.UserServiceEx;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.jetbrains.annotations.NotNull;
@@ -27,12 +27,15 @@ import javax.servlet.http.HttpServletRequest;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserServiceEx userServiceEx;
 
     @GetMapping("/index")
     @ApiOperation("用户首页接口")
-    public UserIndexVO index(@NotNull String accessToken) {
-        JwtUtil.parseToekn(accessToken);
+    public UserIndexVO index(@NotNull Long id) {
+        User user = userServiceEx.getById(id);
         UserIndexVO userIndexVO = new UserIndexVO();
+        userIndexVO.setUserInfo(user);
         return userIndexVO;
     }
 

@@ -57,8 +57,11 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         String authToken = authHeader.substring("Bearer ".length());
 
         Claims claims = JwtUtil.parseToekn(authToken);
-        // todo 这块要改
-        String openid = (String) claims.get("user_id");
+        if (claims == null) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+        String openid = (String) claims.get("openid");
 
         if (redisUtil.exists(authToken)) {
             return;

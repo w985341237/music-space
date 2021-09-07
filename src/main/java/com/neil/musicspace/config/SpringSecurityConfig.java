@@ -46,18 +46,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 //禁用session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .and().addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class)
-                //定义验权失败返回格式
-                .exceptionHandling().accessDeniedHandler(accessDeniedHandler).authenticationEntryPoint(authenticationEntryPoint)
-//                // 配置登出逻辑
-//                .and().logout()
-//                .logoutSuccessHandler(logoutSuccessHandler)
-                .and().authorizeRequests()
                 .antMatchers(AUTH_LIST)
                 .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .httpBasic();
+        http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class)
+                //定义验权失败返回格式
+                .exceptionHandling().accessDeniedHandler(accessDeniedHandler).authenticationEntryPoint(authenticationEntryPoint);
     }
 }

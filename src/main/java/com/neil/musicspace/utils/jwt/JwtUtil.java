@@ -39,10 +39,10 @@ public class JwtUtil {
     /**
      * 用户登录成功后生成Jwt
      * 使用Hs256算法
-     * @param user
+     * @param openid
      * @return
      */
-    public static String createToken(User user, String session_key) {
+    public static String createToken(String openid, String session_key) {
         //指定签名的时候使用的签名算法，也就是header那部分，jjwt已经将这部分内容封装好了。
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 
@@ -50,7 +50,7 @@ public class JwtUtil {
         Date now = new Date(nowMillis);
         Date expireDate = new Date(nowMillis + EXPIRE * 1000);
         Map<String, Object> claims = new HashMap<>();
-        claims.put("user_id", user.getId());
+        claims.put("openid", openid);
         claims.put("session_key", session_key);
 
         JwtBuilder builder = Jwts.builder()

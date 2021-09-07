@@ -3,6 +3,7 @@ package com.neil.musicspace.models.entity;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
 
@@ -10,8 +11,10 @@ import java.io.Serializable;
 public class User implements Serializable {
     private Long id;
 
+    @JsonIgnore
     private String openid;
 
+    @JsonIgnore
     private String unionid;
 
     private String nickName;
@@ -22,6 +25,7 @@ public class User implements Serializable {
 
     private String phoneNumber;
 
+    @JsonIgnore
     private Integer roleId;
 
     private Integer status;

@@ -15,7 +15,6 @@ import com.neil.musicspace.models.vo.UserVO;
 import com.neil.musicspace.service.user.UserLoginService;
 import com.neil.musicspace.service.user.UserService;
 import com.neil.musicspace.service.user.UserServiceEx;
-import com.neil.musicspace.utils.DateUtil;
 import com.neil.musicspace.utils.WeixinUtil;
 import com.neil.musicspace.utils.jwt.JwtUtil;
 import com.neil.musicspace.utils.redis.RedisUtil;
@@ -26,7 +25,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
 
 /**
  * @Description 用户登录Service
@@ -82,7 +80,7 @@ public class UserLoginServiceImpl implements UserLoginService {
         LoginVO loginVO = new LoginVO();
 
         // 下发token
-        String token = JwtUtil.createToken(user, content.getSessionKey());
+        String token = JwtUtil.createToken(openId, content.getSessionKey());
         loginVO.setAccessToken(token);
         loginVO.setSessionKey(content.getSessionKey());
 

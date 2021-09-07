@@ -1,7 +1,5 @@
 package com.neil.musicspace.service.user;
 
-import com.neil.musicspace.models.entity.User;
-
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -13,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 public interface UserService {
 
     /**
-     * 绑定用户手机号码
+     * 绑定用户手机号码 （暂时没有用）
      *
      * @param encryptedData
      * @param iv
